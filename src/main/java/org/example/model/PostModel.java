@@ -9,22 +9,38 @@ import retrofit2.Response;
 import java.util.List;
 import java.util.Optional;
 public class PostModel {
-    public Optional<Response<List<Post>>> fetchAllPosts() {
-        ApiService service = ApiClient.getApiService();
-        Call<List<Post>> call = service.getAllPosts();
+
+    private ApiService service = ApiClient.getApiService();
+
+    public List<Post> fetchPosts() {
         try {
-            return Optional.of(call.execute());
+            Call<List<Post>> call = service.getAllPosts();
+            Response<List<Post>> response = call.execute();
+            if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                System.out.println("Failed to fetch posts: " + response.code());
+            }
         } catch (Exception ex) {
-            return Optional.empty();
+            ex.printStackTrace();
         }
+        return null;
     }
-    public Optional<Response<Post>> fetchPostById(int id) {
-        ApiService service = ApiClient.getApiService();
-        Call<Post> call = service.getPostById(id);
+
+    public Post fetchPostById(int id) {
         try {
-            return Optional.of(call.execute());
+            Call<Post> call = service.getPostById(id);
+            Response<Post> response = call.execute();
+            if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                System.out.println("Failed to fetch post with ID: " + id + " Status code: " + response.code());
+            }
         } catch (Exception ex) {
-            return Optional.empty();
+            ex.printStackTrace();
         }
+        return null;
     }
+
 }
+

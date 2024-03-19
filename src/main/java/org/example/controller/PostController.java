@@ -13,7 +13,7 @@ public class PostController {
     }
 
     public void getAllPosts(){
-        view.displayAllPosts(model.fetchAllPosts());
+        view.displayAllPosts(model.fetchPosts());
     }
     public void getPostById(int id){
         view.displayPost(model.fetchPostById(id));

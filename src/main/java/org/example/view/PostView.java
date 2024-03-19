@@ -12,19 +12,24 @@ public class PostView {
 
     Scanner scanner = new Scanner(System.in);
 
-    public void displayAllPosts(Optional<Response<List<Post>>> optional) {
-        if (optional.isPresent() && optional.get().isSuccessful()) {
-            List<Post> posts = optional.get().body();
-            posts.forEach(post -> System.out.println(post.getTitle()));
+    public void displayAllPosts(List<Post> posts) {
+        if (posts != null && !posts.isEmpty()) {
+            for (Post post : posts) {
+                System.out.println("Post ID: " + post.getId());
+                System.out.println("Title: " + post.getTitle());
+                System.out.println("Body: " + post.getBody());
+                System.out.println();
+            }
         } else {
             System.out.println(Constants.NO_DATA_MSG);
         }
     }
 
-    public void displayPost(Optional<Response<Post>> optional) {
-        if (optional.isPresent() && optional.get().isSuccessful()) {
-            Post post = optional.get().body();
-            System.out.println(post.getTitle());
+    public void displayPost(Post post) {
+        if (post != null) {
+            System.out.println("Post ID: " + post.getId());
+            System.out.println("Title: " + post.getTitle());
+            System.out.println("Body: " + post.getBody());
         } else {
             System.out.println(Constants.NO_DATA_MSG);
         }
