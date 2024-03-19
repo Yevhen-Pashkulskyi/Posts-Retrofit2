@@ -9,9 +9,9 @@ public class AppStarter {
 
     public static void start() {
         PostModel model = new PostModel();
-        PostView view = new PostView();
         MenuView menuView = new MenuView();
-        AppController controller = new AppController(model, view, menuView);
+        PostView postView = new PostView();
+        AppController controller = new AppController(model, menuView, postView);
 
         controller.runApplication();
     }
